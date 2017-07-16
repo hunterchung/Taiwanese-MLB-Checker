@@ -1,0 +1,14 @@
+
+.idea/
+beautifulsoup4-4.6.0.dist-info/
+bs4/
+certifi-2017.4.17.dist-info/
+certifi/
+chardet-3.0.4.dist-info/
+chardet/
+idna-2.5.dist-info/
+idna/
+requests-2.18.1.dist-info/
+requests/
+urllib3-1.21.1.dist-info/
+urllib3/
