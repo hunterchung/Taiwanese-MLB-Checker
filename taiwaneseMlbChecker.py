@@ -6,8 +6,10 @@ import datetime
 import os
 
 today = datetime.date.today()
-base_url = 'http://gd2.mlb.com/components/game/mlb/year_{}/month_{:02d}/day_{:02d}'.format(today.year, today.month, today.day)
+base_url = 'http://gd2.mlb.com/components/game/mlb/year_{}/month_{:02d}/day_{:02d}'.format(today.year, today.month,
+                                                                                           today.day)
 player_name = 'Tzu-Wei Lin'
+
 
 def get_game_link():
     r = requests.get(base_url)
@@ -22,6 +24,7 @@ def get_game_link():
 
     return links[0]
 
+
 def get_player_events(game_link, player_id=624407):
     r = requests.get(os.path.join(base_url, game_link, 'batters/{}.xml'.format(player_id)))
     if not r.ok:
@@ -35,6 +38,7 @@ def get_player_events(game_link, player_id=624407):
         return None
 
     return [ab['event'] for ab in at_bats.find_all('ab')]
+
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
     return {
@@ -64,6 +68,7 @@ def build_response(session_attributes, speechlet_response):
         'response': speechlet_response
     }
 
+
 def get_alexa_output():
     game_link = get_game_link()
     if not game_link:
@@ -74,6 +79,7 @@ def get_alexa_output():
         return '{} has not played yet.'.format(player_name)
     else:
         return '{} has {} today.'.format(player_name, ', '.join(events))
+
 
 def lambda_handler(event, context):
     output = get_alexa_output()
